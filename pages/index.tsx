@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { GetStaticProps } from 'next'
-import link from 'next/link'
+import Link from 'next/link'
 import Layout from '../components/Layout'
 import { getAllPostsData } from '../lib/fetch'
 import { POST } from '../types/types'
@@ -35,9 +35,21 @@ const BlogPage: React.FC<STATICPROPS> = ({ posts }) => {
     }
   }, [])
   return (
-    <div className="flex justify-center items-center flex-col min-h-screen font-mono">
-      Hello Nextjs
-    </div>
+    <Layout title="Blog">
+      <p className="text-4xl mb-10">blog page</p>
+      <ul>
+        {posts &&
+          posts.map((post) => (
+            <li key={post.id}>
+              <Link href={`/posts/${post.id}`}>
+                <a className="cursor-pointer border-b border-gray-500 hover:bg-gray-300">
+                  {post.title}
+                </a>
+              </Link>
+            </li>
+          ))}
+      </ul>
+    </Layout>
   )
 }
 export default BlogPage
