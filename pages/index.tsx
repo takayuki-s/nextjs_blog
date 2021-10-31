@@ -89,3 +89,11 @@ const BlogPage: React.FC<STATICPROPS> = ({ posts }) => {
   )
 }
 export default BlogPage
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await getAllPostsData()
+  return {
+    props: { posts },
+    revalidate: 3,
+  }
+}
