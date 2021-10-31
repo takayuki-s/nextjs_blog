@@ -36,6 +36,12 @@ const PostDetail: React.FC<POST> = ({
             </span>
           ))}
       </div>
+      <p className="m-10 text-x1 font-bold">{title}</p>
+      <p className="mx-10 mb-12">{content}</p>
+      <p>{created_at}</p>
+      <p className="mt-3">
+        {'by '} {username}
+      </p>
     </Layout>
   )
 }
