@@ -43,7 +43,7 @@ const PostDetail: React.FC<POST> = ({
         {'by '} {username}
       </p>
       <Link href="/">
-        <div className="flex cursour-pointer mt-12">
+        <div className="flex cursor-pointer mt-12">
           <svg
             className="w-6 h-6 mr-3"
             fill="none"
