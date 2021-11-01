@@ -11,6 +11,28 @@ const Auth: React.FC = () => {
   const [password, setPassword] = useState('')
   const [isLogin, setIsLogin] = useState('')
   const [error, setError] = useState('')
+
+  const login = async () => {
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/jwt/create/`,
+        { username: username, password: password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      if (res.status === 200) {
+        const options = { path: '/' }
+        cookie.set('access_token', res.data.access, options)
+        router.push('/')
+      }
+    } catch {
+      setError('Login Error')
+    }
+  }
+
   return <></>
 }
 
