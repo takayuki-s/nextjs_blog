@@ -24,7 +24,7 @@ const Layout: React.FC<TITLE> = ({ children, title = 'Nextjs' }) => {
                   Blog
                 </a>
               </Link>
-              <Link href="/blog-page">
+              <Link href="/admin-page">
                 <a
                   data-testid="admin-nav"
                   className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded"
