@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Cookie from 'universal-cookie'
 import axios from 'axios'
@@ -30,6 +30,27 @@ const Auth: React.FC = () => {
       }
     } catch {
       setError('Login Error')
+    }
+  }
+  const authUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (isLogin) {
+      login()
+    } else {
+      try {
+        const res = await axios.post(
+          `${process.env.NEXT_PUBLIC_RESTAPI_URL}/resister/`,
+          { username: username, password: password },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        if (res.status === 201) login()
+      } catch {
+        setError('Registration Error')
+      }
     }
   }
 
