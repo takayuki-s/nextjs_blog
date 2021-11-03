@@ -39,7 +39,7 @@ const Auth: React.FC = () => {
     } else {
       try {
         const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_RESTAPI_URL}/resister/`,
+          `${process.env.NEXT_PUBLIC_RESTAPI_URL}/register/`,
           { username: username, password: password },
           {
             headers: {
@@ -48,7 +48,8 @@ const Auth: React.FC = () => {
           }
         )
         if (res.status === 201) login()
-      } catch {
+      } catch (err) {
+        console.log(err)
         setError('Registration Error')
       }
     }
@@ -56,7 +57,7 @@ const Auth: React.FC = () => {
 
   return (
     <>
-      <p className="text-3xl tet-center">{isLogin ? 'Login' : 'Sign up'}</p>
+      <p className="text-3xl text-center">{isLogin ? 'Login' : 'Sign up'}</p>
       <form onSubmit={authUser} className="mt-8 space-y-3">
         <div>
           <input
