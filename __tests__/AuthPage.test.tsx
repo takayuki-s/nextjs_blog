@@ -66,3 +66,17 @@ afterEach(() => {
 afterAll(() => {
   server.close()
 })
+
+describe('AdminPage Tets Cases', () => {
+  it('Should route to index-page when login succeeded', async () => {
+    const { page } = await getPage({
+      route: '/admin-page',
+    })
+    render(page)
+    expect(await screen.findByText('Login')).toBeInTheDocument()
+    userEvent.type(screen.getByPlaceholderText('Username'), 'user1')
+    userEvent.type(screen.getByPlaceholderText('Password'), 'dummypw')
+    userEvent.click(screen.getByText('Login with JWT'))
+    expect(await screen.findByText('blog page')).toBeInTheDocument()
+  })
+})
