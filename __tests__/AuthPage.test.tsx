@@ -34,7 +34,7 @@ const handlers = [
         ctx.json([
           {
             id: 1,
-            title: 'title',
+            title: 'title1',
             content: 'content1',
             username: 'username1',
             tags: [
@@ -45,7 +45,7 @@ const handlers = [
           },
           {
             id: 2,
-            title: 'title',
+            title: 'title2',
             content: 'content2',
             username: 'username2',
             tags: [
@@ -71,7 +71,7 @@ afterAll(() => {
   server.close()
 })
 
-describe('AdminPage Tets Cases', () => {
+describe('AdminPage Test Cases', () => {
   it('Should route to index-page when login succeeded', async () => {
     const { page } = await getPage({
       route: '/admin-page',
