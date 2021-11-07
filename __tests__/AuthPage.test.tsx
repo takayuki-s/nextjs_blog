@@ -105,4 +105,15 @@ describe('AdminPage Test Cases', () => {
     expect(screen.queryByText('blog page')).toBeNull()
     screen.debug()
   })
+  it('Should change to register mode', async () => {
+    const { page } = await getPage({
+      route: '/admin-page',
+    })
+    render(page)
+    expect(await screen.findByText('Login')).toBeInTheDocument()
+    expect(screen.getByText('Login with JWT')).toBeInTheDocument()
+    userEvent.click(screen.getByTestId('mode-change'))
+    expect(screen.getByText('Sign up')).toBeInTheDocument()
+    expect(screen.getByText('Create new user')).toBeInTheDocument()
+  })
 })
