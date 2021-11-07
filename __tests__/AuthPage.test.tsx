@@ -116,4 +116,16 @@ describe('AdminPage Test Cases', () => {
     expect(screen.getByText('Sign up')).toBeInTheDocument()
     expect(screen.getByText('Create new user')).toBeInTheDocument()
   })
+  it('Should route to index-page when register+login succeeded', async () => {
+    const { page } = await getPage({
+      route: '/admin-page',
+    })
+    render(page)
+    expect(await screen.findByText('Login')).toBeInTheDocument()
+    userEvent.click(screen.getByTestId('mode-change'))
+    userEvent.type(screen.getByPlaceholderText('Username'), 'user1')
+    userEvent.type(screen.getByPlaceholderText('Password'), 'dummypw')
+    userEvent.click(screen.getByText('Create new user'))
+    expect(await screen.findByText('blog page')).toBeInTheDocument()
+  })
 })
