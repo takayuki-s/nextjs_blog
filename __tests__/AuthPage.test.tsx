@@ -103,7 +103,6 @@ describe('AdminPage Test Cases', () => {
     expect(await screen.findByText('Login Error'))
     expect(screen.getByText('Login')).toBeInTheDocument()
     expect(screen.queryByText('blog page')).toBeNull()
-    screen.debug()
   })
   it('Should change to register mode', async () => {
     const { page } = await getPage({
@@ -127,5 +126,27 @@ describe('AdminPage Test Cases', () => {
     userEvent.type(screen.getByPlaceholderText('Password'), 'dummypw')
     userEvent.click(screen.getByText('Create new user'))
     expect(await screen.findByText('blog page')).toBeInTheDocument()
+  })
+  it('Should not route to index-page when register+login succeeded', async () => {
+    server.use(
+      rest.post(
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/register/`,
+        (req, res, ctx) => {
+          return res(ctx.status(400))
+        }
+      )
+    )
+    const { page } = await getPage({
+      route: '/admin-page',
+    })
+    render(page)
+    expect(await screen.findByText('Login')).toBeInTheDocument()
+    userEvent.click(screen.getByTestId('mode-change'))
+    userEvent.type(screen.getByPlaceholderText('Username'), 'user1')
+    userEvent.type(screen.getByPlaceholderText('Password'), 'dummypw')
+    userEvent.click(screen.getByText('Create new user'))
+    expect(await screen.findByText('Registration Error'))
+    expect(screen.getByText('Sign up')).toBeInTheDocument()
+    expect(screen.queryByText('blog page')).toBeNull()
   })
 })
