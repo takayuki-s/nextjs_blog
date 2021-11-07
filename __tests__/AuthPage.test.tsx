@@ -83,4 +83,26 @@ describe('AdminPage Test Cases', () => {
     userEvent.click(screen.getByText('Login with JWT'))
     expect(await screen.findByText('blog page')).toBeInTheDocument()
   })
+  it('Should not route to index-page when login is failed', async () => {
+    server.use(
+      rest.post(
+        `${process.env.NEXT_PUBLIC_RESTAPI_URL}/jwt/create/`,
+        (req, res, ctx) => {
+          return res(ctx.status(400))
+        }
+      )
+    )
+    const { page } = await getPage({
+      route: '/admin-page',
+    })
+    render(page)
+    expect(await screen.findByText('Login')).toBeInTheDocument()
+    userEvent.type(screen.getByPlaceholderText('Username'), 'user1')
+    userEvent.type(screen.getByPlaceholderText('Password'), 'dummypw')
+    userEvent.click(screen.getByText('Login with JWT'))
+    expect(await screen.findByText('Login Error'))
+    expect(screen.getByText('Login')).toBeInTheDocument()
+    expect(screen.queryByText('blog page')).toBeNull()
+    screen.debug()
+  })
 })
