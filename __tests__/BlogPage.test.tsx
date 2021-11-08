@@ -82,4 +82,12 @@ describe('BlogPage Test Cases', () => {
     expect(screen.getByTestId('btn-1')).toBeInTheDocument()
     expect(screen.getByTestId('btn-2')).toBeInTheDocument()
   })
+  it('Should not render delete btn + logout btn when no cookie', async () => {
+    const { page } = await getPage({
+      route: '/',
+    })
+    render(page)
+    expect(await screen.findByText('blog page')).toBeInTheDocument()
+    expect(screen.queryByTestId('logout-icon')).toBeNull()
+  })
 })
