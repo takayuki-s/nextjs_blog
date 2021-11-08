@@ -71,4 +71,15 @@ describe('BlogPage Test Cases', () => {
     userEvent.click(screen.getByTestId('blog-nav'))
     expect(await screen.findByText('blog page')).toBeInTheDocument()
   })
+  it('Should render delete btn + logout btn when JWT token cookie exist', async () => {
+    document.cookie = 'access_token=123xyz'
+    const { page } = await getPage({
+      route: '/',
+    })
+    render(page)
+    expect(await screen.findByText('blog page')).toBeInTheDocument()
+    expect(screen.getByTestId('logout-icon')).toBeInTheDocument()
+    expect(screen.getByTestId('btn-1')).toBeInTheDocument()
+    expect(screen.getByTestId('btn-2')).toBeInTheDocument()
+  })
 })
