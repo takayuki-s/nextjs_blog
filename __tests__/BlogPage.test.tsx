@@ -60,3 +60,15 @@ afterEach(() => {
 afterAll(() => {
   server.close()
 })
+describe('BlogPage Test Cases', () => {
+  it('Should route to admin page and route back to blog page', async () => {
+    const { page } = await getPage({
+      route: '/',
+    })
+    render(page)
+    userEvent.click(screen.getByTestId('admin-nav'))
+    expect(await screen.findByText('Login')).toBeInTheDocument()
+    userEvent.click(screen.getByTestId('blog-nav'))
+    expect(await screen.findByText('blog page')).toBeInTheDocument()
+  })
+})
