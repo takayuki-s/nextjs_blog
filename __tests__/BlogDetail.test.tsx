@@ -100,3 +100,18 @@ afterEach(() => {
 afterAll(() => {
   server.close()
 })
+
+describe('BlogDetailPage Test Cases', () => {
+  it('Should render detailed content of ID 1', async () => {
+    const { page } = await getPage({
+      route: '/posts/1',
+    })
+    render(page)
+    expect(await screen.findByText('title1')).toBeInTheDocument()
+    expect(screen.getByText('content1')).toBeInTheDocument()
+    expect(screen.getByText('by username1')).toBeInTheDocument()
+    expect(screen.getByText('tag1')).toBeInTheDocument()
+    expect(screen.getByText('tag2')).toBeInTheDocument()
+    screen.debug()
+  })
+})
