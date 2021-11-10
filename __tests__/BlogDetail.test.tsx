@@ -120,4 +120,13 @@ describe('BlogDetailPage Test Cases', () => {
     expect(screen.getByText('tag1')).toBeInTheDocument()
     expect(screen.getByText('tag2')).toBeInTheDocument()
   })
+  it('Should route back to blog-page from detail page', async () => {
+    const { page } = await getPage({
+      route: '/posts/2',
+    })
+    render(page)
+    await screen.findByText('title2')
+    userEvent.click(screen.getByTestId('back-blog'))
+    expect(await screen.findByText('blog page')).toBeInTheDocument()
+  })
 })
