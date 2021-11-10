@@ -51,19 +51,17 @@ const handlers = [
     (req, res, ctx) => {
       return res(
         ctx.status(200),
-        ctx.json([
-          {
-            id: 1,
-            title: 'title1',
-            content: 'content1',
-            username: 'username1',
-            tags: [
-              { id: 1, name: 'tag1' },
-              { id: 2, name: 'tag2' },
-            ],
-            created_at: '2021-01-12 14:59:41',
-          },
-        ])
+        ctx.json({
+          id: 1,
+          title: 'title1',
+          content: 'content1',
+          username: 'username1',
+          tags: [
+            { id: 1, name: 'tag1' },
+            { id: 2, name: 'tag2' },
+          ],
+          created_at: '2021-01-12 14:59:41',
+        })
       )
     }
   ),
@@ -72,19 +70,17 @@ const handlers = [
     (req, res, ctx) => {
       return res(
         ctx.status(200),
-        ctx.json([
-          {
-            id: 2,
-            title: 'title2',
-            content: 'content2',
-            username: 'username2',
-            tags: [
-              { id: 1, name: 'tag1' },
-              { id: 2, name: 'tag2' },
-            ],
-            created_at: '2021-01-12 14:59:41',
-          },
-        ])
+        ctx.json({
+          id: 2,
+          title: 'title2',
+          content: 'content2',
+          username: 'username2',
+          tags: [
+            { id: 1, name: 'tag1' },
+            { id: 2, name: 'tag2' },
+          ],
+          created_at: '2021-01-12 14:59:41',
+        })
       )
     }
   ),
@@ -112,6 +108,5 @@ describe('BlogDetailPage Test Cases', () => {
     expect(screen.getByText('by username1')).toBeInTheDocument()
     expect(screen.getByText('tag1')).toBeInTheDocument()
     expect(screen.getByText('tag2')).toBeInTheDocument()
-    screen.debug()
   })
 })
