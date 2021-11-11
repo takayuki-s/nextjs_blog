@@ -22,5 +22,10 @@ describe('PostDetailPage Test Cases', () => {
   it('Should render correctly with given props value', () => {
     render(<PostDetail {...dummyProps} />)
     expect(screen.getByText(dummyProps.title)).toBeInTheDocument()
+    expect(screen.getByText(dummyProps.content)).toBeInTheDocument()
+    expect(screen.getByText(`by ${dummyProps.username}`)).toBeInTheDocument()
+    expect(screen.getByText(dummyProps.tags[0].name)).toBeInTheDocument()
+    expect(screen.getByText(dummyProps.tags[1].name)).toBeInTheDocument()
+    expect(screen.getByText(dummyProps.created_at)).toBeInTheDocument()
   })
 })
